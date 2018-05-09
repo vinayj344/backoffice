@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- ~ [y] hybris Platform ~ ~ Copyright (c) 2000-2015 hybris AG ~ All rights 
+	reserved. ~ ~ This software is the confidential and proprietary information 
+	of hybris ~ ("Confidential Information"). You shall not disclose such Confidential 
+	~ Information and shall use it only in accordance with the terms of the ~ 
+	license agreement you entered into with hybris. -->
+<!-- ATTENTION: This is just an example file. You have to edit it according 
+	to your needs. -->
+
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<itemtypes>
+		<itemtype code="EchoContractType" autocreate="true" generate="true">
+			<description>Represents a contract type in SAP. Type is Echo specific.</description>
+			<deployment table="ECHOCONTRACTTYPE" typecode="11001" />
+			<attributes>
+				<attribute qualifier="code" type="java.lang.String">
+					<modifiers read="true" write="true" search="true"
+						initial="true" optional="false" unique="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="name" type="localized:java.lang.String">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+			<indexes>
+				<index name="EchoContractType_Code" unique="true">
+					<key attribute="code" />
+				</index>
+			</indexes>
+		</itemtype>
+
+
+		<itemtype code="EchoContract" generate="true" autocreate="true">
+			<description>Represents a contract in SAP. Type is Echo specific.</description>
+			<deployment table="ECHOCONTRACT" typecode="11002" />
+			<attributes>
+				<attribute qualifier="code" type="java.lang.String">
+					<description>The contract code (unique)</description>
+					<modifiers read="true" write="true" search="true"
+						optional="false" unique="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="validFrom" type="java.util.Date">
+					<description>Start Date for this contract (not valid before this date)</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="validTo" type="java.util.Date">
+					<description>End Date for this contract (not valid after this date)</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="contractType" type="EchoContractType">
+					<description>The contract type</description>
+					<modifiers read="true" write="true" search="true"
+						optional="false" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="active" type="java.lang.Boolean"
+					autocreate="true">
+					<description>Flag indicating whether this contract is active or not</description>
+					<modifiers read="true" write="true" optional="false" />
+					<persistence type="property" />
+					<defaultvalue>Boolean.FALSE</defaultvalue>
+				</attribute>
+				<attribute type="java.lang.String" qualifier="displayCode">
+					<persistence type="dynamic" attributeHandler="echoDisplayContractCode" />
+					<modifiers read="true" write="false" />
+				</attribute>
+				<attribute qualifier="contractDescription" type="java.lang.String">
+					<description>The contract code (unique)</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" unique="true" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+			<indexes>
+				<index name="EchoContract_Code" unique="true">
+					<key attribute="code" />
+				</index>
+			</indexes>
+		</itemtype>
+
+		<itemtype code="EchoIncoterm" autocreate="true" generate="true">
+			<description>Represents an incoterm from SAP. Type is Echo specific.</description>
+			<deployment table="ECHOINCOTERM" typecode="11004" />
+			<attributes>
+				<attribute qualifier="code" type="java.lang.String">
+					<modifiers read="true" write="true" search="true"
+						initial="true" optional="false" unique="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="name" type="localized:java.lang.String">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="hybrisName" type="localized:java.lang.String">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="active" type="java.lang.Boolean"
+					autocreate="true">
+					<description>Flag indicating whether this incoterm is active or not</description>
+					<modifiers read="true" write="true" optional="false" />
+					<persistence type="property" />
+					<defaultvalue>Boolean.TRUE</defaultvalue>
+				</attribute>
+			</attributes>
+			<indexes>
+				<index name="EchoIncoterm_Code" unique="true">
+					<key attribute="code" />
+				</index>
+			</indexes>
+		</itemtype>
+
+		<itemtype code="EchoShippingType" autocreate="true" generate="true">
+			<description>Represents an shipping type from SAP. Type is Echo specific.</description>
+			<deployment table="ECHOSHIPPINGTYPE" typecode="11005" />
+			<attributes>
+				<attribute qualifier="code" type="java.lang.String">
+					<modifiers read="true" write="true" search="true"
+						initial="true" optional="false" unique="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="name" type="localized:java.lang.String">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="hybrisName" type="localized:java.lang.String">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="active" type="java.lang.Boolean"
+					autocreate="true">
+					<description>Flag indicating whether this shipping type is active or not</description>
+					<modifiers read="true" write="true" optional="false" />
+					<persistence type="property" />
+					<defaultvalue>Boolean.TRUE</defaultvalue>
+				</attribute>
+			</attributes>
+			<indexes>
+				<index name="EchoShippingType_Code" unique="true">
+					<key attribute="code" />
+				</index>
+			</indexes>
+		</itemtype>
+
+		<itemtype code="EchoContractLine" generate="true" autocreate="true">
+			<description>Represents a contract line in SAP. Type is Echo specific.</description>
+			<deployment table="ECHOCONTRACTLINE" typecode="11003" />
+			<attributes>
+				<attribute qualifier="entryNumber" type="java.lang.Integer">
+					<description>The position of this item in the contract</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="product" type="Product">
+					<description>The product in the line</description>
+					<modifiers read="true" write="true" search="true"
+						optional="false" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="customerDescription" type="java.lang.String">
+					<description>The customer's description  for the product in this contract line</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="defaultQuantity" type="java.lang.Long">
+					<description>The default purchase quantity  for the product in this contract line</description>
+					<modifiers read="true" write="true" search="true"
+						optional="false" />
+					<persistence type="property">
+						<columntype>
+							<value>java.math.BigDecimal</value>
+						</columntype>
+					</persistence>
+				</attribute>
+				<attribute qualifier="unit" type="Unit">
+					<description>The purchase unit for the product in this contract line</description>
+					<modifiers read="true" write="true" search="true"
+						optional="false" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="shippingAddress" type="Address">
+					<description>The address (ship-to) to which this product can be shipped</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="incoterm" type="EchoIncoterm">
+					<description>The incoterm for this contract line</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="shippingType" type="EchoShippingType">
+					<description>The shipping type for this contract line</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="active" type="java.lang.Boolean"
+					autocreate="true">
+					<description>Flag indicating whether this contract line is active or not</description>
+					<modifiers read="true" write="true" optional="false" />
+					<persistence type="property" />
+					<defaultvalue>Boolean.TRUE</defaultvalue>
+				</attribute>
+				<attribute qualifier="incoterm2" type="java.lang.String">
+					<description>The incoterm 2 for this contract line</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="availableQuantity" type="java.lang.String">
+					<description>contract line</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<!-- START : 14.2. Order in reference with QTY contract -->
+				<attribute qualifier="orderedQuantity" type="java.lang.String">
+					<description>contract line</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<!-- END : 14.2. Order in reference with QTY contract -->
+
+				<attribute qualifier="contactDescription" type="java.lang.String">
+					<description>contract line</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="utilized" type="java.lang.Boolean">
+					<description>contract line</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+	</itemtypes>
+</items>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- ~ [y] hybris Platform ~ ~ Copyright (c) 2000-2015 hybris AG ~ All rights 
+	reserved. ~ ~ This software is the confidential and proprietary information 
+	of hybris ~ ("Confidential Information"). You shall not disclose such Confidential 
+	~ Information and shall use it only in accordance with the terms of the ~ 
+	license agreement you entered into with hybris. -->
+
+<config xmlns="http://www.hybris.com/cockpit/config">
+
+
+	<context component="explorer-tree" merge-by="module">
+		<n:explorer-tree xmlns:n="http://www.hybris.com/cockpitng/config/explorertree">
+			<n:navigation-node id="huntsman">
+				<n:type-node id="EchoContractLine" code="EchoContractLine" />
+			</n:navigation-node>
+		</n:explorer-tree>
+	</context>
+
+
+	<context type="EchoContractLine" component="listview">
+		<list:list-view xmlns:list="http://www.hybris.com/cockpitng/component/listView">
+			<list:column qualifier="entryNumber" />
+			<list:column qualifier="product" />
+			<list:column qualifier="customerDescription" />
+			<list:column qualifier="defaultQuantity" />
+			<list:column qualifier="shippingAddress" />
+			<list:column qualifier="incoterm" />
+			<list:column qualifier="shippingType" />
+			<list:column qualifier="active" />
+			<list:column qualifier="incoterm2" />
+			<list:column qualifier="availableQuantity" />
+			<list:column qualifier="orderedQuantity" />
+		</list:list-view>
+	</context>
+
+	<context type="EchoShippingType" component="base">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>code</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+
+	<context type="EchoIncoterm" component="base">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>code</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+
+</config>
