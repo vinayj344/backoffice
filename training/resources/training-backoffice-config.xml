@@ -71,4 +71,91 @@
 		</as:advanced-search>
 	</context>
 
+	<context component="editor-area" type="EchoContractLine">
+		<editorArea:editorArea
+			xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="essentials">
+				<editorArea:section name="essentials">
+					<editorArea:attribute qualifier="entryNumber" />
+				</editorArea:section>
+				<editorArea:section name="product">
+					<editorArea:attribute qualifier="product" />
+					<editorArea:attribute qualifier="customerDescription" />
+					<editorArea:attribute qualifier="contactDescription" />
+				</editorArea:section>
+				<editorArea:section name="incoterm">
+					<editorArea:attribute qualifier="incoterm" />
+					<editorArea:attribute qualifier="incoterm2" />
+				</editorArea:section>
+			</editorArea:tab>
+
+			<editorArea:tab name="quantity">
+				<editorArea:section name="quantity">
+					<editorArea:attribute qualifier="defaultQuantity" />
+					<editorArea:attribute qualifier="availableQuantity" />
+					<editorArea:attribute qualifier="orderedQuantity" />
+					<editorArea:attribute qualifier="unit" />
+				</editorArea:section>
+			</editorArea:tab>
+
+			<editorArea:tab name="shipping">
+				<editorArea:section name="shipping">
+					<editorArea:attribute qualifier="shippingAddress" />
+					<editorArea:attribute qualifier="shippingType" />
+				</editorArea:section>
+			</editorArea:tab>
+
+			<editorArea:tab name="others">
+				<editorArea:section name="others">
+					<editorArea:attribute qualifier="active" />
+					<editorArea:attribute qualifier="utilized" />
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+
+
+<!-- 	 <context component="create-wizard" type="EchoContractLine">
+		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config"
+			id="StadiumWizard" title="create.stadium.title">
+			<wz:prepare id="stadiumPrepare">
+				<wz:initialize property="newStadium" type="EchoContractLine" />
+			</wz:prepare>
+			<wz:step id="step1" label="create.stadium.general.label"
+				sublabel="create.stadium.general.sublabel">
+				<wz:content id="step1.content">
+					<wz:property-list root="newStadium">
+						<wz:property qualifier="entryNumber" />
+						<wz:property qualifier="defaultQuantity" />
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step1.navigation">
+					<wz:cancel />
+					<wz:done visible="!#empty(newStadium.entryNumber)">
+						<wz:save property="newStadium" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context> -->
+ 
 </config>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
