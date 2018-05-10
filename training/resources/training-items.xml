@@ -10,7 +10,186 @@
 <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="items.xsd">
 
+	<collectiontypes>
+		<collectiontype elementtype="Catalog" code="DependentCatalogs"
+			autocreate="true" type="list" />
+		<collectiontype elementtype="B2bCustomer" code="CustomerSet"
+			autocreate="true" type="set" />
+		<collectiontype elementtype="UserGroup" code="UserGroupSet"
+			autocreate="true" type="set" />
+		<collectiontype elementtype="java.lang.String" code="TextLines"
+			autocreate="true" type="list" />
+	</collectiontypes>
+
+	<enumtypes>
+		<enumtype code="EchoInvoiceStatus" autocreate="true"
+			generate="true" dynamic="true">
+			<value code="NOT_DUE" />
+			<value code="DUE" />
+			<value code="OVERDUE" />
+			<value code="CLOSED" />
+		</enumtype>
+
+		<enumtype code="EchoAssignment" autocreate="true" generate="true"
+			dynamic="true">
+			<value code="SO" />
+			<value code="DELIVERY_NO" />
+			<value code="INVOICE" />
+			<value code="SHIPMENT_DOC" />
+		</enumtype>
+
+		<!-- Extend the B2BGroupEnum with new groups -->
+		<enumtype code="B2BGroupEnum" autocreate="true" generate="true"
+			dynamic="true">
+			<description>Special B2B Groups for Echo project which grant different rights to members</description>
+			<value code="displayprices" />
+			<value code="warehouseuser" />
+			<value code="agent" />
+			<value code="accountmanager" />
+			<value code="customerservicegroup" />
+			<value code="displayinvoices" />
+		</enumtype>
+
+		<enumtype code="EchoOrderConsignmentType" autocreate="true"
+			generate="true" dynamic="true">
+			<description>Possible Order types in Echo Project (OR = Standard Order, KB = Consignment Order, KE = Consignment Issue)</description>
+			<value code="OR" />
+			<value code="KB" />
+			<value code="KE" />
+		</enumtype>
+
+		<enumtype code="EchoOrderStatus" autocreate="true" generate="true"
+			dynamic="false">
+			<value code="CREATED" />
+			<value code="CONFIRMED" />
+			<value code="COMPLETED" />
+			<value code="SHIPPED" />
+			<value code="INVOICED" />
+			<value code="CANCELLED" />
+		</enumtype>
+
+		<enumtype code="OrderStatus" autocreate="false" generate="true"
+			dynamic="true">
+			<value code="SHIPPED" />
+			<value code="INVOICED" />
+		</enumtype>
+
+	</enumtypes>
+	<relations>
+		<relation code="EchoContract2EchoContractLine" localized="false"
+			generate="true" autocreate="true">
+			<sourceElement type="EchoContract" qualifier="echoContract"
+				cardinality="one">
+				<modifiers read="true" write="true" search="true"
+					optional="true" />
+				<custom-properties>
+					<property name="ordering.attribute">
+						<value>"entryNumber"</value>
+					</property>
+				</custom-properties>
+			</sourceElement>
+			<targetElement type="EchoContractLine" qualifier="echoContractLines"
+				cardinality="many" collectiontype="list" ordered="false">
+				<modifiers read="true" write="true" search="true"
+					optional="true" partof="true" />
+			</targetElement>
+		</relation>
+	</relations>
+
 	<itemtypes>
+
+		<itemtype code="B2BCustomer" autocreate="true" generate="true">
+			<description>Extending B2BCustomer type with additional attributes.</description>
+			<deployment table="B2BCustomer" typecode="12003" />
+			<attributes>
+				<!-- Huntsman added -->
+				<attribute qualifier="firstName" type="localized:java.lang.String">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<description>The first name of this B2B Customer User.</description>
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="lastName" type="localized:java.lang.String">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<description>The last name of this B2B Customer User.</description>
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="acceptedTermsTime" type="java.util.Date">
+					<modifiers read="true" write="true" search="true" />
+					<description>Attribute records when Customer has accepted the terms to advance to site</description>
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="acceptedTermsConditions" type="java.lang.Boolean">
+					<modifiers read="true" write="true" search="true"
+						optional="false" />
+					<description>Flag indicating whether Customer has accepted the terms to advance to site</description>
+					<persistence type="property" />
+					<defaultvalue>Boolean.FALSE</defaultvalue>
+				</attribute>
+				<attribute qualifier="saleOrgActive" type="java.lang.Boolean">
+					<modifiers read="true" write="true" search="true"
+						optional="false" />
+					<description>Flag indicating whether Customer has show all B2B units from sale Organization</description>
+					<persistence type="property" />
+					<defaultvalue>Boolean.FALSE</defaultvalue>
+				</attribute>
+
+				<attribute type="java.lang.Boolean" qualifier="sendEmailEnabled">
+					<modifiers optional="false" search="false" />
+					<persistence type="property" />
+					<defaultvalue>Boolean.FALSE</defaultvalue>
+					<description>Attribute to control sending email to test users.</description>
+				</attribute>
+
+				<attribute type="java.util.Date" qualifier="lastLoginTimeforJob">
+					<modifiers optional="true" search="false" />
+					<persistence type="property" />
+					<description>Last login time for job</description>
+				</attribute>
+
+			</attributes>
+		</itemtype>
+
+		<itemtype code="B2BUnit" autocreate="true" generate="true">
+			<deployment table="B2BUnit" typecode="12002" />
+
+			<attributes>
+				<attribute qualifier="locName2" type="localized:java.lang.String">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<description>The second localized name of this B2BUnit (Sold-to)</description>
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="displayUid">
+					<persistence type="dynamic" attributeHandler="echoDisplayB2BUnitUid" />
+					<modifiers read="true" write="false" />
+				</attribute>
+				<!--Qnov changed... Req. 3.1 -->
+				<attribute type="java.lang.String" qualifier="servicelevel">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<description>Service Level</description>
+					<persistence type="property" />
+				</attribute>
+				<!--Qnov changed... Req. 3.1 END -->
+				<!--Qnov changed... Req. 1.2 -->
+				<attribute type="java.lang.String" qualifier="IndustryCode">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<description>Service Level</description>
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="C4CAccountID">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<description>Service Level</description>
+					<persistence type="property" />
+				</attribute>
+				<!--Qnov changed... Req. 1.2 END -->
+			</attributes>
+		</itemtype>
+
 		<itemtype code="EchoContractType" autocreate="true" generate="true">
 			<description>Represents a contract type in SAP. Type is Echo specific.</description>
 			<deployment table="ECHOCONTRACTTYPE" typecode="11001" />

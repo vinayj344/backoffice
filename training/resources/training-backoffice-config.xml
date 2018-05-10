@@ -49,4 +49,26 @@
 		</y:base>
 	</context>
 
+	<context type="EchoContractLine" component="simple-search">
+		<yss:simple-search
+			xmlns:yss="http://www.hybris.com/cockpitng/config/simplesearch">
+			<yss:field name="entryNumber" />
+			<yss:sort-field name="entryNumber" asc="false" />
+		</yss:simple-search>
+	</context>
+
+	<context type="EchoContractLine" component="advanced-search">
+		<as:advanced-search
+			xmlns:as="http://www.hybris.com/cockpitng/config/advancedsearch"
+			connection-operator="AND">
+			<as:field-list>
+				<as:field name="entryNumber" operator="contains" selected="true" />
+				<as:field name="shippingType" selected="true" />
+				<as:field editor="java.lang.Long" name="pk" operator="equal"
+					selected="false" sortable="false" />
+			</as:field-list>
+			<as:sort-field name="customerDescription" asc="false" />
+		</as:advanced-search>
+	</context>
+
 </config>
