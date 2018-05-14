@@ -4,15 +4,17 @@ import de.hybris.platform.jalo.Item;
 import de.hybris.platform.jalo.JaloBusinessException;
 import de.hybris.platform.jalo.SessionContext;
 import de.hybris.platform.jalo.type.ComposedType;
+
 import org.apache.log4j.Logger;
 
 public class EchoContract extends GeneratedEchoContract
 {
 	@SuppressWarnings("unused")
 	private final static Logger LOG = Logger.getLogger( EchoContract.class.getName() );
-	
+
 	@Override
-	protected Item createItem(final SessionContext ctx, final ComposedType type, final ItemAttributeMap allAttributes) throws JaloBusinessException
+	public Item createItem(final SessionContext ctx, final ComposedType type, final ItemAttributeMap allAttributes)
+			throws JaloBusinessException
 	{
 		// business code placed here will be executed before the item is created
 		// then create the item
@@ -21,5 +23,5 @@ public class EchoContract extends GeneratedEchoContract
 		// and return the item
 		return item;
 	}
-	
+
 }
