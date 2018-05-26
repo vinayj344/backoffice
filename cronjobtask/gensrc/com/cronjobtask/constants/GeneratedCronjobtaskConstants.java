@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at May 13, 2018 11:45:48 PM                    ---
+ * --- Generated at May 23, 2018 5:50:17 PM                     ---
  * ----------------------------------------------------------------
  */
 package com.cronjobtask.constants;
@@ -17,6 +17,7 @@ public class GeneratedCronjobtaskConstants
 	public static class TC
 	{
 		public static final String COUNTCUSTOMERREGISTEREDCRONJOB = "CountCustomerRegisteredCronjob".intern();
+		public static final String TIMECOMPLETIONCRONJOB = "TimeCompletionCronjob".intern();
 	}
 	public static class Attributes
 	{

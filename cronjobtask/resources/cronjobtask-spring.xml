@@ -16,10 +16,24 @@
 		<property name="flexibleSearchService" ref="flexibleSearchService"></property>
 	</bean>
 
+	<bean id="defaultRegisterCustomersPerDayService"
+		class="com.cronjobtask.service.impl.DefaultRegisterCustomersPerDayService">
+		<property name="customerRegisteredDAO" ref="customerRegisteredDAOImpl"></property>
+	</bean>
+
+
 	<bean id="countCustomerRegisteredJob" class="com.cronjobtask.cronjob.CountCustomerRegisteredJob"
 		parent="abstractJobPerformable">
 		<property name="customerRegisteredDAO" ref="customerRegisteredDAOImpl"></property>
 	</bean>
 
+	<!-- <bean id="timeComplationDAO" class="com.cronjobtask.dao.impl.TimeComplationDAOImpl"> 
+		<property name="flexibleSearchService" ref="flexibleSearchService"></property> 
+		</bean> <bean id="timeCompletionJob" class="com.cronjobtask.cronjob.TimeCompletionJob"> 
+		<property name="timeCompletionDAO" ref="timeComplationDAO"></property> </bean> -->
+
+	<bean id="myCustomCellDecorator" class="com.cronjobtask.cellDecorator.MyCustomCellDecorator"></bean>
+
+	<bean id="muCustomTranslator" class="com.cronjobtask.customTranslator.MuCustomTranslator"></bean>
 
 </beans>

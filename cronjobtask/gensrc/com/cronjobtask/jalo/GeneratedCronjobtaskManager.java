@@ -1,13 +1,14 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at May 13, 2018 11:45:48 PM                    ---
+ * --- Generated at May 23, 2018 5:50:17 PM                     ---
  * ----------------------------------------------------------------
  */
 package com.cronjobtask.jalo;
 
 import com.cronjobtask.constants.CronjobtaskConstants;
 import com.cronjobtask.jalo.CountCustomerRegisteredCronjob;
+import com.cronjobtask.jalo.TimeCompletionCronjob;
 import de.hybris.platform.jalo.Item;
 import de.hybris.platform.jalo.Item.AttributeMode;
 import de.hybris.platform.jalo.JaloBusinessException;
@@ -67,6 +68,32 @@ public abstract class GeneratedCronjobtaskManager extends Extension
 	public CountCustomerRegisteredCronjob createCountCustomerRegisteredCronjob(final Map attributeValues)
 	{
 		return createCountCustomerRegisteredCronjob( getSession().getSessionContext(), attributeValues );
+	}
+	
+	public TimeCompletionCronjob createTimeCompletionCronjob(final SessionContext ctx, final Map attributeValues)
+	{
+		try
+		{
+			ComposedType type = getTenant().getJaloConnection().getTypeManager().getComposedType( CronjobtaskConstants.TC.TIMECOMPLETIONCRONJOB );
+			return (TimeCompletionCronjob)type.newInstance( ctx, attributeValues );
+		}
+		catch( JaloGenericCreationException e)
+		{
+			final Throwable cause = e.getCause();
+			throw (cause instanceof RuntimeException ?
+			(RuntimeException)cause
+			:
+			new JaloSystemException( cause, cause.getMessage(), e.getErrorCode() ) );
+		}
+		catch( JaloBusinessException e )
+		{
+			throw new JaloSystemException( e ,"error creating TimeCompletionCronjob : "+e.getMessage(), 0 );
+		}
+	}
+	
+	public TimeCompletionCronjob createTimeCompletionCronjob(final Map attributeValues)
+	{
+		return createTimeCompletionCronjob( getSession().getSessionContext(), attributeValues );
 	}
 	
 	@Override

@@ -34,7 +34,7 @@ import com.cronjobtask.dao.CustomerRegisteredDAO;
 public class CustomerRegisteredDAOIntegrationTest extends ServicelayerTransactionalTest
 {
 
-	@Resource(name = "customerRegisteredDAO")
+	@Resource(name = "customerRegisteredDAOImpl")
 	private CustomerRegisteredDAO customerRegisteredDAO;
 
 	@Test

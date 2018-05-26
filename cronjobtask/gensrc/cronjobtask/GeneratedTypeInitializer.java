@@ -56,6 +56,16 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			false
 		);
 	
+		createItemType(
+			"TimeCompletionCronjob",
+			"cronjob",
+			com.cronjobtask.jalo.TimeCompletionCronjob.class,
+			null,
+			false,
+			null,
+			false
+		);
+	
 	}
 
 	/**
@@ -118,6 +128,19 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 			single_setAttributeProperties_CountCustomerRegisteredCronjob_date();
 		
+				{
+				Map customPropsMap = new HashMap();
+				
+				setItemTypeProperties(
+					"TimeCompletionCronjob",
+					false,
+					true,
+					true,
+					null,
+					customPropsMap
+				);
+				}
+			
 	}
 
 

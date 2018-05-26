@@ -101,6 +101,11 @@ public class CountCustomerRegisteredJob extends AbstractJobPerformable<CountCust
 		}
 
 		LOG.info(Integer.valueOf(newCustomers.size()));
+		for (final CustomerModel customerModel : newCustomers)
+		{
+			LOG.info("Name:" + customerModel.getName() + ", email:" + customerModel.getContactEmail());
+		}
+
 	}
 
 }

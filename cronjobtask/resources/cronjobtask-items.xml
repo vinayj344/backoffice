@@ -10,6 +10,7 @@
 <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="items.xsd">
 
+
 	<itemtypes>
 
 		<itemtype code="CountCustomerRegisteredCronjob" autocreate="true"
@@ -22,5 +23,11 @@
 			</attributes>
 		</itemtype>
 
+		<itemtype code="TimeCompletionCronjob" autocreate="true"
+			generate="true" extends="cronjob">
+		</itemtype>
+
 	</itemtypes>
+
+
 </items>
